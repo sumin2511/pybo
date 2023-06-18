@@ -1,0 +1,17 @@
+
+textarea {
+    width:400px;
+}
+
+input[type=submit]{
+    margin-top:10px;
+}
+button[type=submit]{
+    margin-top:10px;
+}
+
+/* 내용을 전부 삭제하자.*/
+.comment {
+    border-top:dotted 1px #ddd;
+    font-size:0.7em;
+}
