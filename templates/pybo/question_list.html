@@ -58,7 +58,7 @@
                 {% endif %}
             </td>
             <td class="text-left">{{ question.author.username }}</td> <!-- 글쓴이 추가 -->
-                <td>{{question.create_date }}</td>
+                <td>{{question.create_date|date:'y-m-d H:i' }}</td>
         </tr>
         {% endfor %} 
         {% else %} 

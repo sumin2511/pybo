@@ -27,10 +27,19 @@
                 </div>           
             
                 <div class="d-flex justify-content-end">
-                    <div class="badage badage-light p-2">
-                        {{ question.create_date }}
+                    <div class="badage badage-light p-2 text-left">
+                        <div class="mb-2">{{ question.author.username }}</div>
+                        <div>{{ question.create_date|date:'y-m-d H:i' }}</div>
                     </div>
                 </div>
+                {% if request.user == question.author %}
+                <div class="my-3">
+                    <a href="{% url 'pybo:question_modify' question.id %}"
+                        class="btn btn-sm btn-outline-secondary">수정</a>
+                    <a href="#" class="delete btn btn-sm btn-outline-secondary"
+                        data-uri="{% url 'pybo:question_delete' question.id %}">삭제</a>     
+                </div>
+                {% endif %}  
 
                 <!-- 질문 댓글 Start -->
                 {% if question.comment_set.count > 0 %} 
@@ -40,9 +49,9 @@
                     <div class="comment py-2 text-muted">
                         <span style="white-space: pre-line;">{{ comment.content }}</span>
                         <span>
-                            - {{ comment.author }}, {{ comment.create_date }}
+                            - {{ comment.author }}, {{ comment.create_date |date:'y-m-d H:i'}}
                             {% if comment.modify_date %} 
-                            (수정:{{ comment.modify_date }})
+                            (수정:{{ comment.modify_date |date:'y-m-d H:i'}})
                             {% endif %}     
                         </span>
                         {% if request.user == comment.author %} 
@@ -62,20 +71,6 @@
                 </div>
                 <!--질문댓글 끝-->
 
-                {% if request.user == question.author %}
-                <div class="my-3">
-                    <a href="{% url 'pybo:question_modify' question.id %}"
-                        class="btn btn-sm btn-outline-secondary">수정</a>
-                    <a href="#" class="delete btn btn-sm btn-outline-secondary"
-                        data-uri="{% url 'pybo:question_delete' question.id %}">삭제</a>     
-                </div>
-                {% endif %}  
-                <div class="d-flex justify-content-end">
-                    <div class="badage badage-light p-2 text-left">
-                        <div class="mb-2">{{ question.author.username }}</div>
-                        <div>{{ question_create_date }}</div>
-                    </div>
-                </div>
             </div>        
         </div>
         </div>
@@ -105,7 +100,7 @@
                 <a name="comment_{{ comment.id }}"></a>
                     <div class="comment py-2 text-muted">
                         <span style="white-space: pre-line;">{{ comment.content }}</span>
-                        <span>- {{ comment.author }}, {{ comment.create_date }}
+                        <span>- {{ comment.author }}, {{ comment.create_date|date:'y-m-d H:i' }}
                         {% if comment.modify_date %}
                         (수정:{{ comment.modify_date }})
                         {% endif %}
@@ -139,7 +134,7 @@
         <div class="d-flex justify-content-end">
             <div class="badage badage-light p-2 text-left">
                 <div class="mb-2">{{ answer.author.username }}</div>
-                <div>{{ answer.create_date }}</div>
+                <div>{{ answer.create_date |date:'y-m-d H:i'}}</div>
             </div>
         </div>      
         </div>
